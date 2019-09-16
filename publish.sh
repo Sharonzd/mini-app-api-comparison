@@ -6,4 +6,4 @@ git checkout gh-pages
 mv output_back ..
 git add .
 git commit -m 'publish'
-git push
+git push --set-upstream origin gh-pages
