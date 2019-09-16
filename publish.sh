@@ -9,3 +9,5 @@ rm -rf output_back
 git add .
 git commit -m 'publish'
 git push origin gh-pages
+git checkout master
+echo '发布完成'
