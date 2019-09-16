@@ -1,6 +1,7 @@
 module.exports = {
     title: '一致的 API 标准',
     dest: 'output',
+    base: '/mini-app-api-comparison/',
     description: '手百端能力 sdk',
     themeConfig: {
         editLinks: true,
