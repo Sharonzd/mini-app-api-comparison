@@ -10,7 +10,7 @@ module.exports = {
         nav: [
             { text: '总览', link: '/' },
             { text: '一致API', link: '/api' },
-            // { text: '可选API', link: '/alternative-api' },
+            { text: '可选API', link: '/alternative-api' }
         ],
         sidebar:'auto'
     }
