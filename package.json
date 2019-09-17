@@ -9,8 +9,8 @@
         "vuepress": "^1.0.2"
     },
     "scripts": {
-        "doc": "vuepress dev .",
-        "doc:build": "vuepress build .",
+        "dev": "vuepress dev .",
+        "build": "vuepress build .",
         "publish": "sh publish.sh"
     },
     "files": [

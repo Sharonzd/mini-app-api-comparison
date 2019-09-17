@@ -34,16 +34,16 @@ sidebarDepth: 2
 
 **res.orientation 的合法值**
 
-| 值             | 说明                                                           | 最低版本 |
-|:---------------|:--------------------------------------------------------------|:--------|
-| up             | 默认方向（手机横持拍照），对应 Exif 中的 1。或无 orientation 信息。 |         |
-| up-mirrored    | 同 up，但镜像翻转，对应 Exif 中的 2                              |         |
-| down           | 旋转180度，对应 Exif 中的 3                                     |         |
-| down-mirrored  | 同 down，但镜像翻转，对应 Exif 中的 4                            |         |
-| left-mirrored  | 同 left，但镜像翻转，对应 Exif 中的 5                            |         |
-| right          | 顺时针旋转90度，对应 Exif 中的 6                                 |         |
-| right-mirrored | 同 right，但镜像翻转，对应 Exif 中的 7                           |         |
-| left           | 逆时针旋转90度，对应 Exif 中的 8                                 |         |
+| 值             | 说明                                                           |
+|:---------------|:--------------------------------------------------------------|
+| up             | 默认方向（手机横持拍照），对应 Exif 中的 1。或无 orientation 信息。 |
+| up-mirrored    | 同 up，但镜像翻转，对应 Exif 中的 2                              |
+| down           | 旋转180度，对应 Exif 中的 3                                     |
+| down-mirrored  | 同 down，但镜像翻转，对应 Exif 中的 4                            |
+| left-mirrored  | 同 left，但镜像翻转，对应 Exif 中的 5                            |
+| right          | 顺时针旋转90度，对应 Exif 中的 6                                 |
+| right-mirrored | 同 right，但镜像翻转，对应 Exif 中的 7                           |
+| left           | 逆时针旋转90度，对应 Exif 中的 8                                 |
 
 
 #### 参考链接
@@ -135,11 +135,11 @@ success回调函数参数：
 
 **`object`参数说明** ：
 
-| 参数名      | 类型       | 必填 | 默认值 | 说明                       |
-|----------|----------|----|-----|--------------------------|
-| success  | Function | 否  | -   | 接口调用成功的回调                |
-| fail     | Function | 否  | -   | 接口调用失败的回调函数              |
-| complete | Function | 否  | -   | 接口调用结束的回调函数（调用成功、失败都会执行） |
+| 参数名    | 类型      | 必填  | 默认值 | 说明                                        |
+|:---------|:---------|:-----|:-------|:-------------------------------------------|
+| success  | Function | 否   | -      | 接口调用成功的回调                            |
+| fail     | Function | 否   | -      | 接口调用失败的回调函数                        |
+| complete | Function | 否   | -      | 接口调用结束的回调函数（调用成功、失败都会执行） |
 
 **success返回参数说明** ：
 
@@ -152,7 +152,7 @@ success回调函数参数：
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/screen-brightness)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.getScreenBrightness.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_screen/#swan-getScreenBrightness/)	获取屏幕亮度
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_screen/#swan-getScreenBrightness/)
 
 ### onAccelerometerChange
 
@@ -266,7 +266,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/user-capture-screen)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.onUserCaptureScreen.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_capture/#swan-onUserCaptureScreen/)	监听用户主动截屏事件，用户使用系统截屏按键截屏时触发此事件
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_capture/#swan-onUserCaptureScreen/)
 
 ### 	vibrateLong	
 
@@ -284,7 +284,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ucm2he)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/device/vibrate/wx.vibrateLong.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_vibrate/#swan-vibrateLong/)	使手机发生较长时间的振动（400ms）
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_vibrate/#swan-vibrateLong/)
 
 ### 	vibrateShort	
 
@@ -325,7 +325,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/storage)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.clearStorage.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_remove/#swan-clearStorage/)	清理本地数据缓存
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_remove/#swan-clearStorage/)
 
 ### 	clearStorageSync	
 
@@ -336,7 +336,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ulv85u)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.clearStorageSync.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_remove/#swan-clearStorageSync/)	同步清理本地数据缓存
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_remove/#swan-clearStorageSync/)
 
 ### 	getStorage	
 
@@ -362,7 +362,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/azfobl)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.getStorage.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_save/#swan-getStorage/)	从本地缓存中异步获取指定 key 对应的内容
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_save/#swan-getStorage/)
 
 ### 	getStorageInfo	
 
@@ -389,7 +389,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zvmanq)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.getStorageInfo.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_save/#swan-getStorageInfo/)	异步获取当前 storage 的相关信息
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_save/#swan-getStorageInfo/)
 
 ### 	getStorageInfoSync	
 **解释** ：同步获取当前 storage 的相关信息。
@@ -518,7 +518,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/location)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.chooseLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_get/#swan-chooseLocation/)	打开地图选择位置
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_get/#swan-chooseLocation/)
 
 
 
@@ -534,7 +534,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 	
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ui-map)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/wx.createMapContext.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#swan-createMapContext/)	创建并返回 map 上下文 mapContext 对象
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#swan-createMapContext/)	
 
 
 ### 	mapContext.getCenterLocation
@@ -554,7 +554,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 	
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vc2gdt)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.getCenterLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-getCenterLocation/)	获取当前地图中心的经纬度，返回的是 gcj02 坐标系，可以用于 swan.openLocation
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-getCenterLocation/)
 
 ### 	mapContext.moveToLocation	
 
@@ -564,7 +564,8 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ans8wt)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.moveToLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-moveToLocation/)	将地图中心移动到当前定位点，需要配合 
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-moveToLocation/)
+
 
 
 ### 	mapContext.translateMarker	
@@ -589,7 +590,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 #### 参考链接	
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sg7chr)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.translateMarker.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-translateMarker/)	平移 marker，带动画
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-translateMarker/)
 
 
 ## 文件	
@@ -626,7 +627,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 #### 参考链接	
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/cgohg1)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/file/wx.getSavedFileList.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/file_save/#swan-getSavedFileList/)	获取本地已保存的文件列表
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/file_save/#swan-getSavedFileList/)
 
 
 ## 开放接口
@@ -694,7 +695,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/report)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/data-analysis/wx.reportAnalytics.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/data/#swan-reportAnalytics/)	自定义分析数据上报接口
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/data/#swan-reportAnalytics/)
 
 ###     updateManager.applyUpdate	
 
@@ -711,7 +712,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/neau2a)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/UpdateManager.applyUpdate.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-applyUpdate/)	当新版本下载完成，调用该方法会强制当前小程序应用上新版本并重启
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-applyUpdate/)
 
 ### 	updateManager.onCheckForUpdate	
 
@@ -728,7 +729,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/nm7dtb)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/UpdateManager.onCheckForUpdate.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onCheckForUpdate/)	当向百度后台请求完新版本信息，会进行回调
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onCheckForUpdate/)
 
 ### 	updateManager.onUpdateFailed	
 
@@ -739,7 +740,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sy1k0e)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/UpdateManager.onUpdateFailed.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onUpdateFailed/)	当新版本下载失败，会进行回调
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onUpdateFailed/)
 
 ### 	updateManager.onUpdateReady	
 
@@ -751,7 +752,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gfz316)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/UpdateManager.onUpdateReady.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onUpdateReady/)	当新版本下载完成，会进行回调
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onUpdateReady/)
 
 ### 	getUpdateManager	
 
@@ -764,7 +765,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zdblqg)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#swan-getUpdateManager/)	获取全局唯一的版本更新管理器，用于管理小程序更新
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#swan-getUpdateManager/)
 
 
 
