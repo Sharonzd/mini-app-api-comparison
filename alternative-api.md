@@ -1,7 +1,6 @@
 # 有轻微差异的 API
 
 
-
 ## 媒体
 
 ### chooseImage
