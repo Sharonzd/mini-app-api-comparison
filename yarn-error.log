@@ -1,0 +1,60 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn publish
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  10.15.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:125657:13)
+      at Interface.emit (events.js:189:13)
+      at Interface._ttyWrite (readline.js:783:16)
+      at ReadStream.onkeypress (readline.js:168:10)
+      at ReadStream.emit (events.js:189:13)
+      at emitKeys (internal/readline.js:424:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1022:36)
+      at ReadStream.emit (events.js:189:13)
+      at addChunk (_stream_readable.js:284:12)
+
+npm manifest: 
+  {
+      "name": "@baidu/boxx",
+      "version": "0.0.4",
+      "main": "dist/boxx.umd.js",
+      "production": "dist/boxx.min.js",
+      "module": "dist/boxx.esm.js",
+      "commonjs": "dist/boxx.cjs.js",
+      "devDependencies": {
+          "vuepress": "^1.0.2"
+      },
+      "scripts": {
+          "doc": "vuepress dev .",
+          "doc:build": "vuepress build .",
+          "publish": "sh publish.sh"
+      },
+      "files": [
+          "dist"
+      ],
+      "repository": {
+          "type": "git",
+          "url": "https://github.com/Sharonzd/mini-app-api-comparison.git"
+      },
+      "author": "zhoudan03",
+      "license": "UNLICENSED"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
