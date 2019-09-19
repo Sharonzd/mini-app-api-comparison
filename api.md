@@ -2,7 +2,52 @@
 sidebarDepth: 2
 ---
 
-# API
+# 小程序 API 标准
+
+# 前言
+
+本标准由安卓绿色联盟技术与标准工作组给出的规则起草
+
+本标准起草单位：安卓绿色联盟
+
+本标准主要起草人：百度
+
+
+# 1. 范围
+本标准规定了小程序的 API 的技术规范，用于指导小程序平台提供通用的、一致的 API。
+
+本标准给出了 36 个系统级别 API 的入参和返回值的约束。
+
+本标准将会对 26 个界面相关的 API 制定执行步骤的规范。
+
+本标准要求 39 个 canvas API 遵循浏览器的 canvas 标准。
+
+# 2. 规范引用文件
+规范基于对现有的小程序平台的 API 设计扩展，引用了微信小程序、百度智能小程序、支付宝小程序的官方文档。
+
+规范中的 API 分类参考自 w3c 的 [Roadmap of Web Applications on Mobile](https://w3c.github.io/web-roadmaps/mobile/)
+
+# 3. API 标准
+本标准规定的 API 分类包括以下分类
+
+- 设备
+- 媒体
+- 数据存储
+- 文件
+- 开放接口
+- 网络与通信（Network and Communications）
+- 图形和布局（Graphics and Layout)
+    - canvas
+- 用户交互（User Interaction）
+    - 震动
+    - 通知
+- 性能和调优（Performance and Tuning）
+- 传感器和本地交互（Sensors and Local Interactions）
+    - 定位
+    - 电池状态
+    - 屏幕方向
+
+<!-- TODO core 部分的 API，待定   应用生命周期-->
 
 ## 媒体	
 
@@ -76,7 +121,7 @@ sidebarDepth: 2
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/media_image/#swan-previewImage/)	
 
 
-## 设备
+## 传感器和本地交互
 	
 ### getBatteryInfo
 
@@ -268,6 +313,113 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.onUserCaptureScreen.html)	
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_capture/#swan-onUserCaptureScreen/)
 
+
+	
+###  chooseLocation	
+
+**解释** ： 打开地图选择位置。需要用户授权 scope.userLocation。
+
+**方法参数** ：Object object
+
+**`object`参数说明** ：
+
+| 参数名      | 类型       | 必填 | 默认值 | 说明                       |
+|----------|----------|----|-----|--------------------------|
+| success  | Function | 否  | -   | 接口调用成功的回调函数              |
+| fail     | Function | 否  | -   | 接口调用失败的回调函数              |
+| complete | Function | 否  | -   | 接口调用结束的回调函数（调用成功、失败都会执行） |
+
+**success 返回参数说明** ：
+
+| 参数        | 说明                                         |
+|-----------|--------------------------------------------|
+| name      | 位置名称                                       |
+| address   | 详细地址                                       |
+| latitude  | 纬度，浮点数，范围为-90~90，负数表示南纬。使用 gcj02 国测局坐标系。   |
+| longitude | 经度，浮点数，范围为-180~180，负数表示西经。使用 gcj02 国测局坐标系。 |
+
+#### 参考链接
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/location)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.chooseLocation.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_get/#swan-chooseLocation/)
+
+
+
+### 	createMapContext
+
+**解释** ：创建并返回 map 上下文 mapContext 对象。在自定义组件下，第二个参数传入组件实例 this，以操作组件内 `<map/>` 组件。mapContext 通过 mapId 跟一个 组件绑定，通过它可以操作对应的 组件。
+
+**方法参数** ：String mapId
+
+**`mapId`参数说明** ：要获取 map 组件的 id。
+
+**返回值** ：mapContext
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ui-map)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/wx.createMapContext.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#swan-createMapContext/)	
+
+
+### 	mapContext.getCenterLocation
+
+**解释** ：获取当前地图中心的经纬度，返回的是 gcj02 坐标系，可以用于 swan.openLocation。
+
+**方法参数** ：Object object
+
+**`object`参数说明** ：
+
+| 参数名    | 类型      | 必填  | 默认值 | 说明                                                                  |
+|:---------|:---------|:-----|:-------|:---------------------------------------------------------------------|
+| success  | Function | 否   |        | 接口调用成功的回调函数 ，res = { longitude: "经度", latitude: "纬度"} 。  |
+| fail     | Function | 否   |        | 接口调用失败的回调函数                                                  |
+| complete | Function | 否   |        | 接口调用结束的回调函数（调用成功、失败都会执行）                           |
+
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vc2gdt)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.getCenterLocation.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-getCenterLocation/)
+
+### 	mapContext.moveToLocation	
+
+**解释** ：将地图中心移动到当前定位点，需要配合 map 组件的 show-location 使用 。
+
+**方法参数** ：无
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ans8wt)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.moveToLocation.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-moveToLocation/)
+
+
+
+### 	mapContext.translateMarker	
+
+**解释** ：平移 marker，带动画 。
+
+**方法参数** ：Object object
+
+**`object`参数说明** ：
+
+| 参数名        | 类型      | 必填  | 默认值 | 说明                                         |
+|:-------------|:---------|:-----|:-------|:--------------------------------------------|
+| markerId     | Number   | 是   |        | 指定 marker                                  |
+| destination  | Object   | 是   |        | 指定marker移动到的目标点                       |
+| autoRotate   | Boolean  | 是   |        | 移动过程中是否自动旋转 marker                  |
+| rotate       | Number   | 是   |        | marker 的旋转角度                             |
+| duration     | Number   | 否   |        | 动画持续时长，默认值1000ms，平移与旋转分别计算。  |
+| fail         | Function | 否   |        | 接口调用失败的回调函数                         |
+| animationEnd | Function | 否   |        | 动画结束时回调函数                             |
+| success      | function | 否   |        | 接口调用成功的回调函数                         |
+
+#### 参考链接	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sg7chr)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.translateMarker.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-translateMarker/)
+
+
+
+## 用户交互
+
 ### 	vibrateLong	
 
 **解释** ： 使手机发生较长时间的振动（400ms）
@@ -440,7 +592,7 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.setStorage.html)	
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/storage_save/#swan-setStorage/)	
 
-## 网络
+## 网络与通信
 ### websocket	onSocketClose	
 
 **解释** ：监听 WebSocket 关闭。
@@ -483,114 +635,6 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gecnap)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/network/websocket/wx.onSocketMessage.html)	
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/net_websocket/#swan-onSocketMessage/)
-
-
-
-
-
-
-## 位置
-	
-###  chooseLocation	
-
-**解释** ： 打开地图选择位置。需要用户授权 scope.userLocation。
-
-**方法参数** ：Object object
-
-**`object`参数说明** ：
-
-| 参数名      | 类型       | 必填 | 默认值 | 说明                       |
-|----------|----------|----|-----|--------------------------|
-| success  | Function | 否  | -   | 接口调用成功的回调函数              |
-| fail     | Function | 否  | -   | 接口调用失败的回调函数              |
-| complete | Function | 否  | -   | 接口调用结束的回调函数（调用成功、失败都会执行） |
-
-**success 返回参数说明** ：
-
-| 参数        | 说明                                         |
-|-----------|--------------------------------------------|
-| name      | 位置名称                                       |
-| address   | 详细地址                                       |
-| latitude  | 纬度，浮点数，范围为-90~90，负数表示南纬。使用 gcj02 国测局坐标系。   |
-| longitude | 经度，浮点数，范围为-180~180，负数表示西经。使用 gcj02 国测局坐标系。 |
-
-#### 参考链接
-
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/location)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.chooseLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_get/#swan-chooseLocation/)
-
-
-
-### 	createMapContext
-
-**解释** ：创建并返回 map 上下文 mapContext 对象。在自定义组件下，第二个参数传入组件实例 this，以操作组件内 `<map/>` 组件。mapContext 通过 mapId 跟一个 组件绑定，通过它可以操作对应的 组件。
-
-**方法参数** ：String mapId
-
-**`mapId`参数说明** ：要获取 map 组件的 id。
-
-**返回值** ：mapContext
-	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ui-map)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/wx.createMapContext.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#swan-createMapContext/)	
-
-
-### 	mapContext.getCenterLocation
-
-**解释** ：获取当前地图中心的经纬度，返回的是 gcj02 坐标系，可以用于 swan.openLocation。
-
-**方法参数** ：Object object
-
-**`object`参数说明** ：
-
-| 参数名    | 类型      | 必填  | 默认值 | 说明                                                                  |
-|:---------|:---------|:-----|:-------|:---------------------------------------------------------------------|
-| success  | Function | 否   |        | 接口调用成功的回调函数 ，res = { longitude: "经度", latitude: "纬度"} 。  |
-| fail     | Function | 否   |        | 接口调用失败的回调函数                                                  |
-| complete | Function | 否   |        | 接口调用结束的回调函数（调用成功、失败都会执行）                           |
-
-	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vc2gdt)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.getCenterLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-getCenterLocation/)
-
-### 	mapContext.moveToLocation	
-
-**解释** ：将地图中心移动到当前定位点，需要配合 map 组件的 show-location 使用 。
-
-**方法参数** ：无
-
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ans8wt)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.moveToLocation.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-moveToLocation/)
-
-
-
-### 	mapContext.translateMarker	
-
-**解释** ：平移 marker，带动画 。
-
-**方法参数** ：Object object
-
-**`object`参数说明** ：
-
-| 参数名        | 类型      | 必填  | 默认值 | 说明                                         |
-|:-------------|:---------|:-----|:-------|:--------------------------------------------|
-| markerId     | Number   | 是   |        | 指定 marker                                  |
-| destination  | Object   | 是   |        | 指定marker移动到的目标点                       |
-| autoRotate   | Boolean  | 是   |        | 移动过程中是否自动旋转 marker                  |
-| rotate       | Number   | 是   |        | marker 的旋转角度                             |
-| duration     | Number   | 否   |        | 动画持续时长，默认值1000ms，平移与旋转分别计算。  |
-| fail         | Function | 否   |        | 接口调用失败的回调函数                         |
-| animationEnd | Function | 否   |        | 动画结束时回调函数                             |
-| success      | function | 否   |        | 接口调用成功的回调函数                         |
-
-#### 参考链接	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sg7chr)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.translateMarker.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/location_map/#mapContext-translateMarker/)
 
 
 ## 文件	
@@ -693,6 +737,20 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 **`data`参数说明** ：上报的自定义数据，key为配置中的字段名，value为上报的数据。
 
 
+### 	getUpdateManager	
+
+**解释** ：获取全局唯一的版本更新管理器，用于管理小程序更新。
+
+**方法参数** ：无
+
+**返回值** ：updateManager
+
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zdblqg)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#swan-getUpdateManager/)
+
+
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/report)	
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/open-api/data-analysis/wx.reportAnalytics.html)	
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/data/#swan-reportAnalytics/)
@@ -754,224 +812,14 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/UpdateManager.onUpdateReady.html)	
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#updateManager-onUpdateReady/)
 
-### 	getUpdateManager	
-
-**解释** ：获取全局唯一的版本更新管理器，用于管理小程序更新。
-
-**方法参数** ：无
-
-**返回值** ：updateManager
 
 
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zdblqg)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/get/#swan-getUpdateManager/)
-
-
-
-
-## canvas
-### canvasContext.arc	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lut4uo)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.arc.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-arc/)	画一条弧线
- 
-### canvasContext.beginPath	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vk0ohr)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.beginPath.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-beginPath/)	开始创建一个路径，需要调用 fill 或者 stroke 才会使用路径进行填充或描边
- 
-### canvasContext.bezierCurveTo	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/dzf516)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.bezierCurveTo.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-bezierCurveTo/)	创建三次方贝塞尔曲线路径
- 
-### canvasContext.clearRect	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/xg3h06)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.clearRect.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-clearRect/)	清除画布上在该矩形区域内的内容
- 
-### canvasContext.clip	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rgl453)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.clip.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-clip/)	clip() 方法从原始画布中剪切任意形状和尺寸
- 
-### canvasContext.closePath	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/fg8c9b)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.closePath.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-closePath/)	关闭一个路径
- 
-### canvasContext.createCircularGradient	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ix6opq)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.createCircularGradient.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-createCircularGradient/)	创建一个圆形的渐变颜色
- 
-### canvasContext.createLinearGradient	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/qgb1mf)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.createLinearGradient.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-createLinearGradient/)	创建一个线性的渐变颜色
- 
-### canvasContext.draw	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/he6iwx)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.draw.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-draw/)	将之前在绘图上下文中的描述（路径、变形、样式）画到 canvas 中
- 
-### canvasContext.drawImage	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/pzmtqk)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.drawImage.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-drawImage/)	绘制图像到画布
- 
-### canvasContext.fill	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/yywmib)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fill.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fill/)	对当前路径中的内容进行填充
- 
-### canvasContext.fillRect	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vfpyra)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fillRect.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fillRect/)	填充一个矩形
- 
-### canvasContext.fillText
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/saf43s)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fillText.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fillText/)	在画布上绘制被填充的文本
- 
-### canvasContext.lineTo	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zkno7s)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.lineTo.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-lineTo/)	lineTo 方法增加一个新点，然后创建一条从上次指定点到目标点的线
- 
-### canvasContext.measureText	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rn2r7f)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.measureText.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-measureText/)	测量文本尺寸信息，目前仅返回文本宽度，同步接口
- 
-### canvasContext.moveTo	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/avy1f9)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.moveTo.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-moveTo/)	把路径移动到画布中的指定点，不创建线条
- 
-### canvasContext.quadraticCurveTo	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rq2yds)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.quadraticCurveTo.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-quadraticCurveTo/)	创建二次贝塞尔曲线路径
- 
-### canvasContext.rect	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/xgywt5)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.rect.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-rect/)	创建一个矩形
-
-### canvasContext.restore	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gwoqt0)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.restore.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-restore/)	恢复之前保存的绘图上下文
-
-### canvasContext.rotate	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ncimzx)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.rotate.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-rotate/)	以原点为中心，原点可以用 translate 方法修改
-
-### canvasContext.save	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/qnyf7h)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.save.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-save/)	保存当前的绘图上下文
-
-### canvasContext.scale	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gp3kpy)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.scale.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-scale/)	在调用scale方法后，之后创建的路径其横纵坐标会被缩放
-
-### canvasContext.setFillStyle	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vyfyp2)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setFillStyle.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setFillStyle/)	设置填充色
-
-### canvasContext.setFontSize	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/mg4uir)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setFontSize.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setFontSize/)	设置字体的字号
-
-### canvasContext.setGlobalAlpha	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/cptvsl)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setGlobalAlpha.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setGlobalAlpha/)	设置全局画笔透明度
-
-### canvasContext.setLineCap	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/de22sq)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineCap.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineCap/)	设置线条的端点样式
- 
-### canvasContext.setLineDash	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/cvqcwt)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineDash.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineDash/)	设置线条虚线样式的间距和长度
-
-### canvasContext.setLineJoin	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sfqcgi)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineJoin.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineJoin/)	设置线条的交点样式
-
-### canvasContext.setLineWidth	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ugcrcq)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineWidth.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineWidth/)	设置线条的宽度
-
-### canvasContext.setMiterLimit	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vul12s)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setMiterLimit.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setMiterLimit/)	设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，当 setLineJoin() 为 miter 时才有效，超过最大倾斜长度的，连接处将以 lineJoin 为 bevel 来显示
-
-### canvasContext.setShadow	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/btvtra)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setShadow.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setShadow/)	设置阴影样式
-
-### canvasContext.setStrokeStyle	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lqmreg)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setStrokeStyle.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setStrokeStyle/)	设置边框颜色
-
-### canvasContext.setTextAlign	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rf1uma)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTextAlign.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTextAlign/)	用于设置文字的对齐
-
-### canvasContext.setTextBaseline	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/wo3gqy)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTextBaseline.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTextBaseline/)	用于设置文字的水平对齐
- 
-### canvasContext.setTransform	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/wt6glg)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTransform.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTransform/)	使用矩阵重新设置（覆盖）当前变换的方法
-
-### canvasContext.stroke	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/pgahxv)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.stroke.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-stroke/)	画出当前路径的边框
-
-### canvasContext.strokeRect	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vz04q8)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.strokeRect.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-strokeRect/)	画一个矩形(非填充)
-
-### canvasContext.translate	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lgqkb2)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.translate.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-translate/)	对当前坐标系的原点 (0， 0) 进行变换，默认的坐标系原点为页面左上角
-
-### createCanvasContext	
-- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ui-canvas)	
-- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.createCanvasContext.html)	
-- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#swan-createCanvasContext/)	在 Page 中，推荐使用this.createCanvasContext(canvasId)，进行绘图上下文的创建
-
-
-
-
-## 界面
+## 图形与布局
 
 <!--  todo 界面仍然可以制定规范，只是不约束 UI-->
+
+以下界面相关的 API，不约束 UI 部分，但约束运行步骤，未完待续。
+
 
 ### setTabBarStyle	
 
@@ -1107,3 +955,260 @@ TRIM_MEMORY_RUNNING_CRITICAL = 15
 - [阿里小程序原文档地址](https://docs.alipay.com/mini/api/qx0sap)
 - [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/device/screen/wx.setKeepScreenOn.html)
 - [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/device_screen/#swan-setKeepScreenOn/)	设置是否保持常亮状态
+
+
+
+## canvas
+
+以下canvas 的 API 应该遵循[浏览器的 canvas 标准](https://html.spec.whatwg.org/multipage/canvas.html)，具体规范不再详述。
+
+
+### createCanvasContext
+
+进行绘图上下文的创建
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ui-canvas)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/wx.createCanvasContext.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#swan-createCanvasContext/)	
+
+### canvasContext.arc
+
+画一条弧线
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lut4uo)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.arc.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-arc/)	
+ 
+### canvasContext.beginPath
+
+开始创建一个路径，需要调用 fill 或者 stroke 才会使用路径进行填充或描边
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vk0ohr)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.beginPath.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-beginPath/)	
+ 
+### canvasContext.bezierCurveTo	
+
+创建三次方贝塞尔曲线路径
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/dzf516)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.bezierCurveTo.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-bezierCurveTo/)	
+ 
+### canvasContext.clearRect
+
+清除画布上在该矩形区域内的内容
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/xg3h06)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.clearRect.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-clearRect/)	
+ 
+### canvasContext.clip	
+clip() 方法从原始画布中剪切任意形状和尺寸
+ 
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rgl453)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.clip.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-clip/)
+
+### canvasContext.closePath
+
+关闭一个路径
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/fg8c9b)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.closePath.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-closePath/)	
+ 
+### canvasContext.createCircularGradient
+
+创建一个圆形的渐变颜色
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ix6opq)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.createCircularGradient.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-createCircularGradient/)	
+ 
+### canvasContext.createLinearGradient
+
+创建一个线性的渐变颜色
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/qgb1mf)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.createLinearGradient.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-createLinearGradient/)	
+ 
+### canvasContext.draw
+
+将之前在绘图上下文中的描述（路径、变形、样式）画到 canvas 中
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/he6iwx)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.draw.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-draw/)	
+ 
+### canvasContext.drawImage	
+
+绘制图像到画布
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/pzmtqk)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.drawImage.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-drawImage/)	
+ 
+### canvasContext.fill
+
+对当前路径中的内容进行填充
+		
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/yywmib)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fill.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fill/)
+ 
+### canvasContext.fillRect
+
+填充一个矩形
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vfpyra)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fillRect.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fillRect/)	
+ 
+### canvasContext.fillText
+在画布上绘制被填充的文本
+ 
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/saf43s)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.fillText.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-fillText/)	
+
+### canvasContext.lineTo	
+
+lineTo 方法增加一个新点，然后创建一条从上次指定点到目标点的线
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/zkno7s)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.lineTo.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-lineTo/)	
+ 
+### canvasContext.measureText	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rn2r7f)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.measureText.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-measureText/)	测量文本尺寸信息，目前仅返回文本宽度，同步接口
+ 
+### canvasContext.moveTo	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/avy1f9)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.moveTo.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-moveTo/)	把路径移动到画布中的指定点，不创建线条
+ 
+### canvasContext.quadraticCurveTo	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rq2yds)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.quadraticCurveTo.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-quadraticCurveTo/)	创建二次贝塞尔曲线路径
+ 
+### canvasContext.rect	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/xgywt5)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.rect.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-rect/)	创建一个矩形
+
+### canvasContext.restore	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gwoqt0)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.restore.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-restore/)	恢复之前保存的绘图上下文
+
+### canvasContext.rotate
+
+以原点为中心，原点可以用 translate 方法修改
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ncimzx)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.rotate.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-rotate/)	
+
+### canvasContext.save
+保存当前的绘图上下文
+	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/qnyf7h)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.save.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-save/)	
+
+### canvasContext.scale	
+在调用scale方法后，之后创建的路径其横纵坐标会被缩放
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/gp3kpy)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.scale.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-scale/)	
+
+### canvasContext.setFillStyle	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vyfyp2)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setFillStyle.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setFillStyle/)	设置填充色
+
+### canvasContext.setFontSize	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/mg4uir)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setFontSize.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setFontSize/)	设置字体的字号
+
+### canvasContext.setGlobalAlpha	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/cptvsl)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setGlobalAlpha.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setGlobalAlpha/)	设置全局画笔透明度
+
+### canvasContext.setLineCap	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/de22sq)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineCap.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineCap/)	设置线条的端点样式
+ 
+### canvasContext.setLineDash	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/cvqcwt)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineDash.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineDash/)	设置线条虚线样式的间距和长度
+
+### canvasContext.setLineJoin	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/sfqcgi)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineJoin.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineJoin/)	设置线条的交点样式
+
+### canvasContext.setLineWidth	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/ugcrcq)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setLineWidth.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setLineWidth/)	设置线条的宽度
+
+### canvasContext.setMiterLimit	
+
+设置最大斜接长度，斜接长度指的是在两条线交汇处内角和外角之间的距离，当 setLineJoin() 为 miter 时才有效，超过最大倾斜长度的，连接处将以 lineJoin 为 bevel 来显示
+
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vul12s)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setMiterLimit.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setMiterLimit/)	
+
+### canvasContext.setShadow	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/btvtra)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setShadow.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setShadow/)	设置阴影样式
+
+### canvasContext.setStrokeStyle	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lqmreg)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setStrokeStyle.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setStrokeStyle/)	设置边框颜色
+
+### canvasContext.setTextAlign	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/rf1uma)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTextAlign.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTextAlign/)	用于设置文字的对齐
+
+### canvasContext.setTextBaseline	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/wo3gqy)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTextBaseline.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTextBaseline/)	用于设置文字的水平对齐
+ 
+### canvasContext.setTransform	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/wt6glg)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.setTransform.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-setTransform/)	使用矩阵重新设置（覆盖）当前变换的方法
+
+### canvasContext.stroke	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/pgahxv)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.stroke.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-stroke/)	画出当前路径的边框
+
+### canvasContext.strokeRect	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/vz04q8)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.strokeRect.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-strokeRect/)	画一个矩形(非填充)
+
+### canvasContext.translate	
+- [阿里小程序原文档地址](https://docs.alipay.com/mini/api/lgqkb2)	
+- [微信小程序原文档地址](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.translate.html)	
+- [百度小程序原文档地址](https://smartprogram.baidu.com/docs/develop/api/show_canvas/#canvasContext-translate/)	对当前坐标系的原点 (0， 0) 进行变换，默认的坐标系原点为页面左上角
+
+
